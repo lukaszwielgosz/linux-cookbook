@@ -41,6 +41,15 @@ socat -v udp4-datagram:172.24.176.116:54321 open:/dev/ttyS10,raw,nonblock,waitlo
 - `b115200` - sets the baud rate to 115,200 bits
 - `crnl` - converts newlines from \n to \r\n
 
+server:
+```
+socat -v udp4-listen:12345,fork,reuseaddr open:/dev/ttyUSB0,raw,nonblock,echo=0,b115200,crnl
+```
+
+client (takes input from stdin)
+```
+socat - udp4-datagram:127.0.0.1:12345,broadcast
+```
 
 # TCP serial bridge
 ```
